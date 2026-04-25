@@ -1415,14 +1415,36 @@
 
   async function loadSiteContent() {
     try {
-      const [siteResponse, categoriesResponse] = await Promise.all([
-        fetch('content/site.json'),
+      const [
+        settingsResponse,
+        homeResponse,
+        portfolioResponse,
+        aboutResponse,
+        contactResponse,
+        categoriesResponse
+      ] = await Promise.all([
+        fetch('content/settings.json'),
+        fetch('content/home.json'),
+        fetch('content/portfolio-page.json'),
+        fetch('content/about.json'),
+        fetch('content/contact.json'),
         fetch('content/categories.json')
       ]);
-      if (!siteResponse.ok) throw new Error(`site.json HTTP ${siteResponse.status}`);
+      if (!settingsResponse.ok) throw new Error(`settings.json HTTP ${settingsResponse.status}`);
+      if (!homeResponse.ok) throw new Error(`home.json HTTP ${homeResponse.status}`);
+      if (!portfolioResponse.ok) throw new Error(`portfolio-page.json HTTP ${portfolioResponse.status}`);
+      if (!aboutResponse.ok) throw new Error(`about.json HTTP ${aboutResponse.status}`);
+      if (!contactResponse.ok) throw new Error(`contact.json HTTP ${contactResponse.status}`);
       if (!categoriesResponse.ok) throw new Error(`categories.json HTTP ${categoriesResponse.status}`);
 
-      siteContent = await siteResponse.json();
+      const settings = await settingsResponse.json();
+      siteContent = {
+        ...settings,
+        home: await homeResponse.json(),
+        portfolio: await portfolioResponse.json(),
+        about: await aboutResponse.json(),
+        contact: await contactResponse.json()
+      };
       const categoriesData = await categoriesResponse.json();
       portfolioCategories = Array.isArray(categoriesData.categories) ? categoriesData.categories : [];
       portfolioCategories.sort((a, b) => (a.order || 0) - (b.order || 0));

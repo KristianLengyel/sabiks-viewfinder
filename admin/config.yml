@@ -8,83 +8,114 @@ backend:
 media_folder: "uploads/images"
 public_folder: "/uploads/images"
 
+editor:
+  preview: false
+
 collections:
-  - name: "content"
-    label: "Site Content"
+  - name: "settings"
+    label: "01 - Website Settings"
     files:
-      - name: "site"
-        label: "Website Text, Contact, Socials"
-        file: "content/site.json"
+      - name: "settings"
+        label: "Site Name, Footer, Social Links"
+        file: "content/settings.json"
         format: "json"
         fields:
-          - { label: "Site Name", name: "siteName", widget: "string" }
-          - { label: "Footer Text", name: "footerText", widget: "string" }
+          - { label: "Website Name", name: "siteName", widget: "string", hint: "Shown in footers and branding areas." }
+          - { label: "Footer Copyright Text", name: "footerText", widget: "string", hint: "Example: © 2026 Samuel Sabol" }
           - label: "Social Links"
             name: "socials"
             widget: "object"
+            collapsed: false
             fields:
               - { label: "Instagram URL", name: "instagram", widget: "string" }
               - { label: "Facebook URL", name: "facebook", widget: "string" }
-          - label: "Home Page"
-            name: "home"
-            widget: "object"
+
+  - name: "home_page"
+    label: "02 - Home Page"
+    files:
+      - name: "home"
+        label: "Home Page Text"
+        file: "content/home.json"
+        format: "json"
+        fields:
+          - { label: "Hero Small Text", name: "heroEyebrow", widget: "string" }
+          - { label: "Hero Big Title", name: "heroTitle", widget: "text", hint: "Use new lines for line breaks. Put *asterisks* around italic words." }
+          - { label: "Hero Description", name: "heroSubtitle", widget: "text" }
+          - { label: "Intro Small Label", name: "introLabel", widget: "string" }
+          - { label: "Intro Big Title", name: "introTitle", widget: "text", hint: "Use new lines for line breaks. Put *asterisks* around italic words." }
+          - label: "Intro Paragraphs"
+            name: "introText"
+            widget: "list"
+            summary: "{{fields.paragraph}}"
+            field: { label: "Paragraph", name: "paragraph", widget: "text" }
+          - label: "Homepage Stats"
+            name: "stats"
+            widget: "list"
+            summary: "{{fields.number}} - {{fields.label}}"
             fields:
-              - { label: "Hero Eyebrow", name: "heroEyebrow", widget: "string" }
-              - { label: "Hero Title", name: "heroTitle", widget: "text", hint: "Use new lines for title breaks. Wrap words in *asterisks* to italicize them." }
-              - { label: "Hero Subtitle", name: "heroSubtitle", widget: "text" }
-              - { label: "Intro Label", name: "introLabel", widget: "string" }
-              - { label: "Intro Title", name: "introTitle", widget: "text", hint: "Use new lines for title breaks. Wrap words in *asterisks* to italicize them." }
-              - label: "Intro Paragraphs"
-                name: "introText"
-                widget: "list"
-                field: { label: "Paragraph", name: "paragraph", widget: "text" }
-              - label: "Stats"
-                name: "stats"
-                widget: "list"
-                fields:
-                  - { label: "Number", name: "number", widget: "string" }
-                  - { label: "Label", name: "label", widget: "string" }
-              - { label: "Categories Label", name: "categoriesLabel", widget: "string" }
-              - { label: "Categories Title", name: "categoriesTitle", widget: "string" }
-              - { label: "CTA Label", name: "ctaLabel", widget: "string" }
-              - { label: "CTA Title", name: "ctaTitle", widget: "text", hint: "Use new lines for title breaks. Wrap words in *asterisks* to italicize them." }
-              - { label: "CTA Text", name: "ctaText", widget: "text" }
-          - label: "Portfolio Page"
-            name: "portfolio"
-            widget: "object"
-            fields:
-              - { label: "Label", name: "label", widget: "string" }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Description", name: "description", widget: "text" }
-              - { label: "Empty Title", name: "emptyTitle", widget: "string" }
-              - { label: "Empty Text", name: "emptyText", widget: "text" }
-          - label: "About Page"
-            name: "about"
-            widget: "object"
-            fields:
-              - { label: "Label", name: "label", widget: "string" }
-              - { label: "Image", name: "image", widget: "image" }
-              - { label: "Image Alt Text", name: "imageAlt", widget: "string" }
-              - { label: "Title", name: "title", widget: "text", hint: "Use new lines for title breaks. Wrap words in *asterisks* to italicize them." }
-              - label: "Paragraphs"
-                name: "paragraphs"
-                widget: "list"
-                field: { label: "Paragraph", name: "paragraph", widget: "text" }
-          - label: "Contact Page"
-            name: "contact"
-            widget: "object"
-            fields:
-              - { label: "Label", name: "label", widget: "string" }
-              - { label: "Title", name: "title", widget: "text", hint: "Use new lines for title breaks. Wrap words in *asterisks* to italicize them." }
-              - { label: "Intro", name: "intro", widget: "text" }
-              - { label: "Email", name: "email", widget: "string" }
-              - { label: "Phone", name: "phone", widget: "string" }
-              - { label: "Trust Text", name: "trustText", widget: "text" }
-              - { label: "Form Title", name: "formTitle", widget: "string" }
-              - { label: "Success Title", name: "successTitle", widget: "string" }
-              - { label: "Success Text", name: "successText", widget: "text" }
+              - { label: "Number", name: "number", widget: "string", hint: "Example: 4+" }
+              - { label: "Label", name: "label", widget: "string", hint: "Example: Years Active" }
+          - { label: "Specialties Small Label", name: "categoriesLabel", widget: "string" }
+          - { label: "Specialties Title", name: "categoriesTitle", widget: "string" }
+          - { label: "Bottom CTA Small Label", name: "ctaLabel", widget: "string" }
+          - { label: "Bottom CTA Title", name: "ctaTitle", widget: "text", hint: "Use new lines for line breaks. Put *asterisks* around italic words." }
+          - { label: "Bottom CTA Text", name: "ctaText", widget: "text" }
+
+  - name: "portfolio_page"
+    label: "03 - Portfolio Page"
+    files:
+      - name: "portfolio"
+        label: "Portfolio Page Text"
+        file: "content/portfolio-page.json"
+        format: "json"
+        fields:
+          - { label: "Small Label", name: "label", widget: "string" }
+          - { label: "Page Title", name: "title", widget: "string" }
+          - { label: "Description", name: "description", widget: "text" }
+          - { label: "Empty State Title", name: "emptyTitle", widget: "string", hint: "Shown when a category has no photos." }
+          - { label: "Empty State Text", name: "emptyText", widget: "text" }
+
+  - name: "about_page"
+    label: "04 - About Page"
+    files:
+      - name: "about"
+        label: "About Text and Portrait"
+        file: "content/about.json"
+        format: "json"
+        fields:
+          - { label: "Small Label", name: "label", widget: "string" }
+          - { label: "Portrait Image", name: "image", widget: "image" }
+          - { label: "Image Alt Text", name: "imageAlt", widget: "string" }
+          - { label: "Big Title", name: "title", widget: "text", hint: "Use new lines for line breaks. Put *asterisks* around italic words." }
+          - label: "Paragraphs"
+            name: "paragraphs"
+            widget: "list"
+            summary: "{{fields.paragraph}}"
+            field: { label: "Paragraph", name: "paragraph", widget: "text" }
+
+  - name: "contact_page"
+    label: "05 - Contact Page"
+    files:
+      - name: "contact"
+        label: "Contact Info and Form Text"
+        file: "content/contact.json"
+        format: "json"
+        fields:
+          - { label: "Small Label", name: "label", widget: "string" }
+          - { label: "Big Title", name: "title", widget: "text", hint: "Use new lines for line breaks. Put *asterisks* around italic words." }
+          - { label: "Intro Paragraph", name: "intro", widget: "text" }
+          - { label: "Email Address", name: "email", widget: "string" }
+          - { label: "Phone Number", name: "phone", widget: "string" }
+          - { label: "Small Trust Text", name: "trustText", widget: "text" }
+          - { label: "Form Title", name: "formTitle", widget: "string" }
+          - { label: "Success Message Title", name: "successTitle", widget: "string" }
+          - { label: "Success Message Text", name: "successText", widget: "text" }
+
+  - name: "categories"
+    label: "06 - Categories / Tabs"
+    files:
       - name: "categories"
-        label: "Categories / Tabs"
+        label: "Specialties and Portfolio Tabs"
         file: "content/categories.json"
         format: "json"
         fields:
@@ -92,14 +123,19 @@ collections:
             name: "categories"
             widget: "list"
             summary: "{{fields.order}}. {{fields.title}}"
+            collapsed: false
             fields:
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Slug", name: "slug", widget: "string", hint: "Lowercase ID used by photos, for example portraits or weddings." }
-              - { label: "Image", name: "image", widget: "image" }
-              - { label: "Alt Text", name: "alt", widget: "string" }
-              - { label: "Order", name: "order", widget: "number", value_type: "int", default: 1 }
+              - { label: "Visible Name", name: "title", widget: "string", hint: "What visitors see. Example: Weddings" }
+              - { label: "Category ID", name: "slug", widget: "string", hint: "Lowercase ID used by photos. Keep this stable after photos use it." }
+              - { label: "Category Image", name: "image", widget: "image" }
+              - { label: "Image Alt Text", name: "alt", widget: "string" }
+              - { label: "Display Order", name: "order", widget: "number", value_type: "int", default: 1, hint: "Lower number appears first." }
+
+  - name: "photos"
+    label: "07 - Portfolio Photos"
+    files:
       - name: "photos"
-        label: "Portfolio Photos"
+        label: "Add, Delete, Reorder Photos"
         file: "content/photos.json"
         format: "json"
         fields:
@@ -107,10 +143,11 @@ collections:
             name: "photos"
             widget: "list"
             summary: "{{fields.order}}. {{fields.title}}"
+            collapsed: false
             fields:
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Category Slug", name: "category", widget: "string", hint: "Must match a category slug from Categories / Tabs." }
+              - { label: "Photo Title", name: "title", widget: "string" }
+              - { label: "Category ID", name: "category", widget: "string", hint: "Must match a Category ID from 06 - Categories / Tabs." }
               - { label: "Image", name: "image", widget: "image" }
-              - { label: "Alt Text", name: "alt", widget: "string", required: false }
+              - { label: "Alt Text", name: "alt", widget: "string", required: false, hint: "Short description for accessibility." }
               - { label: "Featured", name: "featured", widget: "boolean", default: false }
-              - { label: "Order", name: "order", widget: "number", value_type: "int", default: 1 }
+              - { label: "Display Order", name: "order", widget: "number", value_type: "int", default: 1, hint: "Lower number appears first." }

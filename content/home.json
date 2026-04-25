@@ -1,0 +1,21 @@
+{
+  "heroEyebrow": "Based in Slovakia",
+  "heroTitle": "Samuel Sabol\n*Photography*",
+  "heroSubtitle": "Portrait, event, automotive and architecture photography — crafted with intention and precision.",
+  "introLabel": "The Work",
+  "introTitle": "Visual stories told\nwith *precision* and\nnatural light",
+  "introText": [
+    "I'm a photographer based in Slovakia with a passion for clean, cinematic imagery. Whether it's capturing the character of a portrait, the energy of an event, the lines of a car, or the geometry of architecture — every frame is intentional.",
+    "My approach is calm and collaborative. I aim for images that feel timeless rather than trendy."
+  ],
+  "stats": [
+    { "number": "4+", "label": "Years Active" },
+    { "number": "200+", "label": "Sessions" },
+    { "number": "6", "label": "Specialties" }
+  ],
+  "categoriesLabel": "Specialties",
+  "categoriesTitle": "What I shoot",
+  "ctaLabel": "Ready to work together?",
+  "ctaTitle": "Let's create something\n*worth remembering*",
+  "ctaText": "Available for bookings across Slovakia and nearby regions. Get in touch to discuss your project."
+}

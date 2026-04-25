@@ -15,3 +15,6 @@ yarn-error.log*
 Thumbs.db
 .vscode/
 .idea/
+
+# secret token
+gitbub_oauth_client_secret.txt

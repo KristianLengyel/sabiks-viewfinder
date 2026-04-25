@@ -619,11 +619,12 @@
 
     .about-hero {
       display: grid; grid-template-columns: 1fr 1fr;
-      min-height: calc(100vh - 72px);
+      min-height: auto;
     }
     .about-hero-image {
       position: relative; background: var(--accent-light);
-      min-height: 500px;
+      height: clamp(560px, 72vh, 760px);
+      min-height: 0;
     }
     .about-hero-image img {
       width: 100%; height: 100%; object-fit: cover; display: block;
@@ -895,7 +896,7 @@
       .portfolio-grid { padding: 32px 24px 80px; columns: 2; }
 
       .about-hero { grid-template-columns: 1fr; }
-      .about-hero-image { min-height: 340px; }
+      .about-hero-image { height: clamp(380px, 52vh, 520px); }
       .about-hero-content { padding: 48px 24px; }
       .about-why { padding: 64px 24px; }
       .why-grid { grid-template-columns: 1fr 1fr; }

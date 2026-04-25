@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Generated scraper output
+sabik-image-scraper/downloaded_images/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,100 @@
+{
+  "photos": [
+    {
+      "title": "Portrait Session",
+      "category": "portraits",
+      "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=700&q=80",
+      "alt": "Portrait photography",
+      "featured": true,
+      "order": 1
+    },
+    {
+      "title": "Portrait Study",
+      "category": "portraits",
+      "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=700&q=80",
+      "alt": "Portrait photography",
+      "featured": true,
+      "order": 2
+    },
+    {
+      "title": "Event Photography",
+      "category": "events",
+      "image": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=700&q=80",
+      "alt": "Event photography",
+      "featured": true,
+      "order": 3
+    },
+    {
+      "title": "Automotive Shoot",
+      "category": "automotive",
+      "image": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=700&q=80",
+      "alt": "Automotive photography",
+      "featured": true,
+      "order": 4
+    },
+    {
+      "title": "Architecture Detail",
+      "category": "architecture",
+      "image": "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&q=80",
+      "alt": "Architecture photography",
+      "featured": false,
+      "order": 5
+    },
+    {
+      "title": "Portrait Editorial",
+      "category": "portraits",
+      "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=700&q=80",
+      "alt": "Portrait photography",
+      "featured": false,
+      "order": 6
+    },
+    {
+      "title": "Automotive Road",
+      "category": "automotive",
+      "image": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=700&q=80",
+      "alt": "Automotive photography",
+      "featured": false,
+      "order": 7
+    },
+    {
+      "title": "Live Event",
+      "category": "events",
+      "image": "https://images.unsplash.com/photo-1519671282429-b44b4a4ef979?w=700&q=80",
+      "alt": "Event photography",
+      "featured": false,
+      "order": 8
+    },
+    {
+      "title": "Modern Architecture",
+      "category": "architecture",
+      "image": "https://images.unsplash.com/photo-1460574283810-2aab119d8511?w=700&q=80",
+      "alt": "Architecture photography",
+      "featured": false,
+      "order": 9
+    },
+    {
+      "title": "Portrait Lifestyle",
+      "category": "portraits",
+      "image": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=700&q=80",
+      "alt": "Portrait photography",
+      "featured": false,
+      "order": 10
+    },
+    {
+      "title": "Automotive Detail",
+      "category": "automotive",
+      "image": "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=700&q=80",
+      "alt": "Automotive photography",
+      "featured": false,
+      "order": 11
+    },
+    {
+      "title": "Architecture Lines",
+      "category": "architecture",
+      "image": "https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=700&q=80",
+      "alt": "Architecture photography",
+      "featured": false,
+      "order": 12
+    }
+  ]
+}

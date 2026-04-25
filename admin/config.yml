@@ -1,0 +1,49 @@
+backend:
+  name: github
+  repo: KristianLengyel/sabiks-viewfinder
+  branch: main
+
+media_folder: "uploads/images"
+public_folder: "/uploads/images"
+
+collections:
+  - name: "content"
+    label: "Content"
+    files:
+      - name: "photos"
+        label: "Portfolio Photos"
+        file: "content/photos.json"
+        format: "json"
+        fields:
+          - label: "Photos"
+            name: "photos"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "Title"
+                name: "title"
+                widget: "string"
+              - label: "Category"
+                name: "category"
+                widget: "select"
+                options:
+                  - { label: "Portraits", value: "portraits" }
+                  - { label: "Events", value: "events" }
+                  - { label: "Automotive", value: "automotive" }
+                  - { label: "Architecture", value: "architecture" }
+              - label: "Image"
+                name: "image"
+                widget: "image"
+              - label: "Alt Text"
+                name: "alt"
+                widget: "string"
+                required: false
+              - label: "Featured"
+                name: "featured"
+                widget: "boolean"
+                default: false
+              - label: "Order"
+                name: "order"
+                widget: "number"
+                value_type: "int"
+                default: 1

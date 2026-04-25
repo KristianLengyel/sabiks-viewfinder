@@ -1,3 +1,58 @@
 {
-  "siteName": "Samuel Sabol Photography"
+  "siteName": "Samuel Sabol Photography",
+  "footerText": "© 2026 Samuel Sabol",
+  "socials": {
+    "instagram": "https://www.instagram.com/sabiks_viewfinder/",
+    "facebook": "https://www.facebook.com/samuel.sabol.92"
+  },
+  "home": {
+    "heroEyebrow": "Based in Slovakia",
+    "heroTitle": "Samuel Sabol\n*Photography*",
+    "heroSubtitle": "Portrait, event, automotive and architecture photography — crafted with intention and precision.",
+    "introLabel": "The Work",
+    "introTitle": "Visual stories told\nwith *precision* and\nnatural light",
+    "introText": [
+      "I'm a photographer based in Slovakia with a passion for clean, cinematic imagery. Whether it's capturing the character of a portrait, the energy of an event, the lines of a car, or the geometry of architecture — every frame is intentional.",
+      "My approach is calm and collaborative. I aim for images that feel timeless rather than trendy."
+    ],
+    "stats": [
+      { "number": "4+", "label": "Years Active" },
+      { "number": "200+", "label": "Sessions" },
+      { "number": "6", "label": "Specialties" }
+    ],
+    "categoriesLabel": "Specialties",
+    "categoriesTitle": "What I shoot",
+    "ctaLabel": "Ready to work together?",
+    "ctaTitle": "Let's create something\n*worth remembering*",
+    "ctaText": "Available for bookings across Slovakia and nearby regions. Get in touch to discuss your project."
+  },
+  "portfolio": {
+    "label": "Work",
+    "title": "Portfolio",
+    "description": "A curated selection of portraits, events, automotive, architecture, commercial and wedding photography.",
+    "emptyTitle": "Portfolio being updated",
+    "emptyText": "New work is being added. For recent work, visit my Instagram or contact me directly."
+  },
+  "about": {
+    "label": "About",
+    "image": "/uploads/images/about_img.jpg",
+    "imageAlt": "Samuel Sabol",
+    "title": "Creating memories\nthat last\n*forever*",
+    "paragraphs": [
+      "I have a passion for capturing the beauty and emotion of life's precious moments. I specialize in portraits, automotive, architecture, and events, and have a keen eye for detail and composition.",
+      "With years of experience and a deep understanding of light and technical aspects of photography, I am able to create stunning, timeless images that my clients will treasure for a lifetime.",
+      "I take the time to get to know my clients, understand their needs and preferences, and work with them to create a personalized photography experience. Trust me to document your special moments and create memories that will last forever."
+    ]
+  },
+  "contact": {
+    "label": "Contact Information",
+    "title": "Book a\n*Photoshoot*",
+    "intro": "I’d love to hear from you! Please reach out with any questions and I look forward to connecting with you soon!",
+    "email": "sabikphoto@gmail.com",
+    "phone": "+421 940 820 199",
+    "trustText": "Available for bookings in Slovakia and nearby regions.",
+    "formTitle": "Let's start a conversation",
+    "successTitle": "Message sent",
+    "successText": "Thank you for reaching out. I'll be in touch within 24 hours to discuss your project."
+  }
 }

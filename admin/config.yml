@@ -2,14 +2,102 @@ backend:
   name: github
   repo: KristianLengyel/sabiks-viewfinder
   branch: main
+  # For Cloudflare Pages, add this after deploying a GitHub OAuth proxy:
+  # base_url: https://your-oauth-proxy-domain.com
 
 media_folder: "uploads/images"
 public_folder: "/uploads/images"
 
 collections:
   - name: "content"
-    label: "Content"
+    label: "Site Content"
     files:
+      - name: "site"
+        label: "Website Text, Contact, Socials"
+        file: "content/site.json"
+        format: "json"
+        fields:
+          - { label: "Site Name", name: "siteName", widget: "string" }
+          - { label: "Footer Text", name: "footerText", widget: "string" }
+          - label: "Social Links"
+            name: "socials"
+            widget: "object"
+            fields:
+              - { label: "Instagram URL", name: "instagram", widget: "string" }
+              - { label: "Facebook URL", name: "facebook", widget: "string" }
+          - label: "Home Page"
+            name: "home"
+            widget: "object"
+            fields:
+              - { label: "Hero Eyebrow", name: "heroEyebrow", widget: "string" }
+              - { label: "Hero Title", name: "heroTitle", widget: "text", hint: "Use new lines for title breaks. Wrap words in *asterisks* to italicize them." }
+              - { label: "Hero Subtitle", name: "heroSubtitle", widget: "text" }
+              - { label: "Intro Label", name: "introLabel", widget: "string" }
+              - { label: "Intro Title", name: "introTitle", widget: "text", hint: "Use new lines for title breaks. Wrap words in *asterisks* to italicize them." }
+              - label: "Intro Paragraphs"
+                name: "introText"
+                widget: "list"
+                field: { label: "Paragraph", name: "paragraph", widget: "text" }
+              - label: "Stats"
+                name: "stats"
+                widget: "list"
+                fields:
+                  - { label: "Number", name: "number", widget: "string" }
+                  - { label: "Label", name: "label", widget: "string" }
+              - { label: "Categories Label", name: "categoriesLabel", widget: "string" }
+              - { label: "Categories Title", name: "categoriesTitle", widget: "string" }
+              - { label: "CTA Label", name: "ctaLabel", widget: "string" }
+              - { label: "CTA Title", name: "ctaTitle", widget: "text", hint: "Use new lines for title breaks. Wrap words in *asterisks* to italicize them." }
+              - { label: "CTA Text", name: "ctaText", widget: "text" }
+          - label: "Portfolio Page"
+            name: "portfolio"
+            widget: "object"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Empty Title", name: "emptyTitle", widget: "string" }
+              - { label: "Empty Text", name: "emptyText", widget: "text" }
+          - label: "About Page"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Image Alt Text", name: "imageAlt", widget: "string" }
+              - { label: "Title", name: "title", widget: "text", hint: "Use new lines for title breaks. Wrap words in *asterisks* to italicize them." }
+              - label: "Paragraphs"
+                name: "paragraphs"
+                widget: "list"
+                field: { label: "Paragraph", name: "paragraph", widget: "text" }
+          - label: "Contact Page"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Title", name: "title", widget: "text", hint: "Use new lines for title breaks. Wrap words in *asterisks* to italicize them." }
+              - { label: "Intro", name: "intro", widget: "text" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Phone", name: "phone", widget: "string" }
+              - { label: "Trust Text", name: "trustText", widget: "text" }
+              - { label: "Form Title", name: "formTitle", widget: "string" }
+              - { label: "Success Title", name: "successTitle", widget: "string" }
+              - { label: "Success Text", name: "successText", widget: "text" }
+      - name: "categories"
+        label: "Categories / Tabs"
+        file: "content/categories.json"
+        format: "json"
+        fields:
+          - label: "Categories"
+            name: "categories"
+            widget: "list"
+            summary: "{{fields.order}}. {{fields.title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Slug", name: "slug", widget: "string", hint: "Lowercase ID used by photos, for example portraits or weddings." }
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Alt Text", name: "alt", widget: "string" }
+              - { label: "Order", name: "order", widget: "number", value_type: "int", default: 1 }
       - name: "photos"
         label: "Portfolio Photos"
         file: "content/photos.json"
@@ -18,34 +106,11 @@ collections:
           - label: "Photos"
             name: "photos"
             widget: "list"
-            summary: "{{fields.title}}"
+            summary: "{{fields.order}}. {{fields.title}}"
             fields:
-              - label: "Title"
-                name: "title"
-                widget: "string"
-              - label: "Category"
-                name: "category"
-                widget: "select"
-                options:
-                  - { label: "Portraits", value: "portraits" }
-                  - { label: "Events", value: "events" }
-                  - { label: "Automotive", value: "automotive" }
-                  - { label: "Architecture", value: "architecture" }
-                  - { label: "Commercial", value: "commercial" }
-                  - { label: "Weddings", value: "weddings" }
-              - label: "Image"
-                name: "image"
-                widget: "image"
-              - label: "Alt Text"
-                name: "alt"
-                widget: "string"
-                required: false
-              - label: "Featured"
-                name: "featured"
-                widget: "boolean"
-                default: false
-              - label: "Order"
-                name: "order"
-                widget: "number"
-                value_type: "int"
-                default: 1
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Category Slug", name: "category", widget: "string", hint: "Must match a category slug from Categories / Tabs." }
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Alt Text", name: "alt", widget: "string", required: false }
+              - { label: "Featured", name: "featured", widget: "boolean", default: false }
+              - { label: "Order", name: "order", widget: "number", value_type: "int", default: 1 }

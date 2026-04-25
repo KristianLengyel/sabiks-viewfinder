@@ -1,0 +1,46 @@
+{
+  "categories": [
+    {
+      "title": "Portraits",
+      "slug": "portraits",
+      "image": "/uploads/images/category_lifestyle.JPG",
+      "alt": "Portraits",
+      "order": 1
+    },
+    {
+      "title": "Events",
+      "slug": "events",
+      "image": "/uploads/images/category_event_client_work.JPG",
+      "alt": "Events",
+      "order": 2
+    },
+    {
+      "title": "Automotive",
+      "slug": "automotive",
+      "image": "/uploads/images/category_automotive.JPG",
+      "alt": "Automotive",
+      "order": 3
+    },
+    {
+      "title": "Architecture",
+      "slug": "architecture",
+      "image": "/uploads/images/category_studio_work.JPG",
+      "alt": "Architecture",
+      "order": 4
+    },
+    {
+      "title": "Commercial",
+      "slug": "commercial",
+      "image": "/uploads/images/category_party.JPG",
+      "alt": "Commercial",
+      "order": 5
+    },
+    {
+      "title": "Weddings",
+      "slug": "weddings",
+      "image": "/uploads/images/category_wedding.JPG",
+      "alt": "Weddings",
+      "order": 6
+    }
+  ]
+}

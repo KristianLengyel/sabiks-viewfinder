@@ -1068,7 +1068,7 @@
         <h2>What I shoot</h2>
       </div>
     </div>
-    <div class="categories-grid">
+    <div class="categories-grid" id="categoriesGrid">
       <div class="cat-card reveal" onclick="filterPortfolio('portraits'); navigate('portfolio')">
         <img src="/uploads/images/category_lifestyle.JPG" alt="Portraits" loading="lazy" />
         <div class="cat-card-content">
@@ -1154,7 +1154,7 @@
     <p>A curated selection of portraits, events, automotive, architecture, commercial and wedding photography.</p>
   </div>
 
-  <div class="filter-bar">
+  <div class="filter-bar" id="portfolioFilterBar">
     <button class="filter-btn active" data-filter="all" onclick="applyFilter('all', this)">All</button>
     <button class="filter-btn" data-filter="portraits" onclick="applyFilter('portraits', this)">Portraits</button>
     <button class="filter-btn" data-filter="events" onclick="applyFilter('events', this)">Events</button>
@@ -1383,7 +1383,170 @@
   function filterPortfolio(cat) { pendingFilter = cat; }
 
   let portfolioPhotos = [];
+  let siteContent = {};
+  let portfolioCategories = [];
   let currentFilter = 'all';
+
+  function formatTitle(value) {
+    return String(value || '').split('\n').map(line => {
+      const text = line.trim();
+      if (!text) return '';
+      return text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    }).join('<br />');
+  }
+
+  function setText(selector, value) {
+    const el = document.querySelector(selector);
+    if (el && value !== undefined) el.textContent = value;
+  }
+
+  function setHTML(selector, value) {
+    const el = document.querySelector(selector);
+    if (el && value !== undefined) el.innerHTML = value;
+  }
+
+  async function loadSiteContent() {
+    try {
+      const [siteResponse, categoriesResponse] = await Promise.all([
+        fetch('/content/site.json'),
+        fetch('/content/categories.json')
+      ]);
+      if (!siteResponse.ok) throw new Error(`site.json HTTP ${siteResponse.status}`);
+      if (!categoriesResponse.ok) throw new Error(`categories.json HTTP ${categoriesResponse.status}`);
+
+      siteContent = await siteResponse.json();
+      const categoriesData = await categoriesResponse.json();
+      portfolioCategories = Array.isArray(categoriesData.categories) ? categoriesData.categories : [];
+      portfolioCategories.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+      applySiteContent();
+      renderCategories();
+      renderFilterButtons();
+      renderPortfolio();
+    } catch (error) {
+      console.error('Failed to load site content:', error);
+    }
+  }
+
+  function applySiteContent() {
+    const { home = {}, portfolio = {}, about = {}, contact = {}, socials = {} } = siteContent;
+
+    setText('.hero-eyebrow', home.heroEyebrow);
+    setHTML('.hero-title', formatTitle(home.heroTitle));
+    setText('.hero-subtitle', home.heroSubtitle);
+    setText('.intro-left .section-label', home.introLabel);
+    setHTML('.intro-left h2', formatTitle(home.introTitle));
+    document.querySelectorAll('.intro-right > p').forEach((el, index) => {
+      if (home.introText && home.introText[index]) el.textContent = home.introText[index];
+    });
+    document.querySelectorAll('.intro-stat').forEach((el, index) => {
+      const stat = home.stats && home.stats[index];
+      if (!stat) return;
+      const number = el.querySelector('.intro-stat-num');
+      const label = el.querySelector('.intro-stat-label');
+      if (number) number.textContent = stat.number || '';
+      if (label) label.textContent = stat.label || '';
+    });
+    setText('.categories-section .section-label', home.categoriesLabel);
+    setText('.categories-section h2', home.categoriesTitle);
+    setText('.dark-cta .section-label', home.ctaLabel);
+    setHTML('.dark-cta h2', formatTitle(home.ctaTitle));
+    setText('.dark-cta p', home.ctaText);
+
+    setText('#page-portfolio .portfolio-hero .section-label', portfolio.label);
+    setText('#page-portfolio .portfolio-hero h1', portfolio.title);
+    setText('#page-portfolio .portfolio-hero p', portfolio.description);
+    setText('#portfolioEmpty h3', portfolio.emptyTitle);
+    setText('#portfolioEmpty p', portfolio.emptyText);
+
+    const aboutImage = document.querySelector('#page-about .about-hero-image img');
+    if (aboutImage) {
+      if (about.image) aboutImage.src = about.image;
+      if (about.imageAlt) aboutImage.alt = about.imageAlt;
+    }
+    setText('#page-about .about-hero-content .section-label', about.label);
+    setHTML('#page-about .about-hero-content h1', formatTitle(about.title));
+    const aboutContent = document.querySelector('#page-about .about-hero-content');
+    const aboutButton = aboutContent && aboutContent.querySelector('.btn-primary');
+    if (aboutContent && aboutButton && Array.isArray(about.paragraphs)) {
+      aboutContent.querySelectorAll(':scope > p').forEach(p => p.remove());
+      about.paragraphs.forEach(text => {
+        const p = document.createElement('p');
+        p.textContent = text;
+        aboutContent.insertBefore(p, aboutButton);
+      });
+    }
+
+    setText('#page-contact .contact-info .section-label', contact.label);
+    setHTML('#page-contact .contact-info h1', formatTitle(contact.title));
+    setText('#page-contact .contact-info > p', contact.intro);
+    const contactLinks = document.querySelectorAll('#page-contact .contact-detail-value');
+    if (contactLinks[0]) {
+      contactLinks[0].textContent = contact.email || '';
+      contactLinks[0].href = `mailto:${contact.email || ''}`;
+    }
+    if (contactLinks[1]) {
+      contactLinks[1].textContent = contact.phone || '';
+      contactLinks[1].href = `tel:${String(contact.phone || '').replace(/[^\d+]/g, '')}`;
+    }
+    if (contactLinks[2] && socials.instagram) contactLinks[2].href = socials.instagram;
+    if (contactLinks[3] && socials.facebook) contactLinks[3].href = socials.facebook;
+    document.querySelectorAll('a[aria-label="Instagram"], .mobile-menu a[href*="instagram"]').forEach(a => { if (socials.instagram) a.href = socials.instagram; });
+    document.querySelectorAll('a[aria-label="Facebook"], .mobile-menu a[href*="facebook"]').forEach(a => { if (socials.facebook) a.href = socials.facebook; });
+    setText('#page-contact .contact-trust', contact.trustText);
+    setText('#contactForm h2', contact.formTitle);
+    setText('#formSuccess h3', contact.successTitle);
+    setText('#formSuccess p', contact.successText);
+
+    document.querySelectorAll('footer .footer-logo').forEach(el => { el.textContent = siteContent.siteName || ''; });
+    document.querySelectorAll('footer .footer-copy').forEach(el => { el.textContent = siteContent.footerText || ''; });
+  }
+
+  function renderCategories() {
+    const grid = document.getElementById('categoriesGrid');
+    if (!grid || portfolioCategories.length === 0) return;
+    grid.innerHTML = '';
+
+    portfolioCategories.forEach((category, index) => {
+      const card = document.createElement('div');
+      card.className = `cat-card reveal${index % 4 ? ` reveal-delay-${index % 4}` : ''}`;
+      card.onclick = () => {
+        filterPortfolio(category.slug);
+        navigate('portfolio');
+      };
+      card.innerHTML = `
+        <img src="${category.image}" alt="${category.alt || category.title}" loading="lazy" />
+        <div class="cat-card-content">
+          <span class="cat-card-num">${String(index + 1).padStart(2, '0')}</span>
+          <span class="cat-card-title">${category.title}</span>
+        </div>
+        <div class="cat-card-arrow">↗</div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function renderFilterButtons() {
+    const bar = document.getElementById('portfolioFilterBar');
+    if (!bar || portfolioCategories.length === 0) return;
+    bar.innerHTML = '';
+
+    const allButton = document.createElement('button');
+    allButton.className = `filter-btn${currentFilter === 'all' ? ' active' : ''}`;
+    allButton.dataset.filter = 'all';
+    allButton.textContent = 'All';
+    allButton.onclick = () => applyFilter('all', allButton);
+    bar.appendChild(allButton);
+
+    portfolioCategories.forEach(category => {
+      const button = document.createElement('button');
+      button.className = `filter-btn${currentFilter === category.slug ? ' active' : ''}`;
+      button.dataset.filter = category.slug;
+      button.textContent = category.title;
+      button.onclick = () => applyFilter(category.slug, button);
+      bar.appendChild(button);
+    });
+  }
 
   async function loadPortfolioPhotos() {
     try {
@@ -1498,6 +1661,7 @@
   }
 
   /* ── INIT ── */
+  document.addEventListener('DOMContentLoaded', loadSiteContent);
   document.addEventListener('DOMContentLoaded', loadPortfolioPhotos);
   navigate(currentPage);
 </script>

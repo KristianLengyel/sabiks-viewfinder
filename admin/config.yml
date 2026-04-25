@@ -3,6 +3,7 @@ backend:
   repo: KristianLengyel/sabiks-viewfinder
   branch: main
   base_url: https://sabiks-decap-oauth.kiki-lengyel.workers.dev
+  auth_endpoint: /auth
 
 media_folder: "uploads/images"
 public_folder: "/uploads/images"

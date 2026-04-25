@@ -2,8 +2,7 @@ backend:
   name: github
   repo: KristianLengyel/sabiks-viewfinder
   branch: main
-  # For Cloudflare Pages, add this after deploying a GitHub OAuth proxy:
-  # base_url: https://your-oauth-proxy-domain.com
+  base_url: https://sabiks-decap-oauth.kiki-lengyel.workers.dev
 
 media_folder: "uploads/images"
 public_folder: "/uploads/images"

@@ -1384,7 +1384,15 @@
 
   let portfolioPhotos = [];
   let siteContent = {};
-  let portfolioCategories = [];
+  const fallbackCategories = [
+    { title: 'Portraits', slug: 'portraits', image: '/uploads/images/category_lifestyle.JPG', alt: 'Portraits', order: 1 },
+    { title: 'Events', slug: 'events', image: '/uploads/images/category_event_client_work.JPG', alt: 'Events', order: 2 },
+    { title: 'Automotive', slug: 'automotive', image: '/uploads/images/category_automotive.JPG', alt: 'Automotive', order: 3 },
+    { title: 'Architecture', slug: 'architecture', image: '/uploads/images/category_studio_work.JPG', alt: 'Architecture', order: 4 },
+    { title: 'Commercial', slug: 'commercial', image: '/uploads/images/category_party.JPG', alt: 'Commercial', order: 5 },
+    { title: 'Weddings', slug: 'weddings', image: '/uploads/images/category_wedding.JPG', alt: 'Weddings', order: 6 }
+  ];
+  let portfolioCategories = fallbackCategories.slice();
   let currentFilter = 'all';
 
   function formatTitle(value) {
@@ -1408,8 +1416,8 @@
   async function loadSiteContent() {
     try {
       const [siteResponse, categoriesResponse] = await Promise.all([
-        fetch('/content/site.json'),
-        fetch('/content/categories.json')
+        fetch('content/site.json'),
+        fetch('content/categories.json')
       ]);
       if (!siteResponse.ok) throw new Error(`site.json HTTP ${siteResponse.status}`);
       if (!categoriesResponse.ok) throw new Error(`categories.json HTTP ${categoriesResponse.status}`);
@@ -1425,6 +1433,9 @@
       renderPortfolio();
     } catch (error) {
       console.error('Failed to load site content:', error);
+      if (portfolioCategories.length === 0) portfolioCategories = fallbackCategories.slice();
+      renderCategories();
+      renderFilterButtons();
     }
   }
 
@@ -1504,10 +1515,11 @@
 
   function renderCategories() {
     const grid = document.getElementById('categoriesGrid');
-    if (!grid || portfolioCategories.length === 0) return;
+    if (!grid) return;
+    const categories = portfolioCategories.length ? portfolioCategories : fallbackCategories;
     grid.innerHTML = '';
 
-    portfolioCategories.forEach((category, index) => {
+    categories.forEach((category, index) => {
       const card = document.createElement('div');
       card.className = `cat-card reveal${index % 4 ? ` reveal-delay-${index % 4}` : ''}`;
       card.onclick = () => {
@@ -1528,7 +1540,8 @@
 
   function renderFilterButtons() {
     const bar = document.getElementById('portfolioFilterBar');
-    if (!bar || portfolioCategories.length === 0) return;
+    if (!bar) return;
+    const categories = portfolioCategories.length ? portfolioCategories : fallbackCategories;
     bar.innerHTML = '';
 
     const allButton = document.createElement('button');
@@ -1538,7 +1551,7 @@
     allButton.onclick = () => applyFilter('all', allButton);
     bar.appendChild(allButton);
 
-    portfolioCategories.forEach(category => {
+    categories.forEach(category => {
       const button = document.createElement('button');
       button.className = `filter-btn${currentFilter === category.slug ? ' active' : ''}`;
       button.dataset.filter = category.slug;
@@ -1550,7 +1563,7 @@
 
   async function loadPortfolioPhotos() {
     try {
-      const response = await fetch('/content/photos.json');
+      const response = await fetch('content/photos.json');
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
       portfolioPhotos = Array.isArray(data.photos) ? data.photos : [];

@@ -95,6 +95,22 @@
       "alt": "Architecture photography",
       "featured": false,
       "order": 12
+    },
+    {
+      "title": "Commercial Campaign",
+      "category": "commercial",
+      "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=700&q=80",
+      "alt": "Commercial photography",
+      "featured": false,
+      "order": 13
+    },
+    {
+      "title": "Wedding Story",
+      "category": "weddings",
+      "image": "https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80",
+      "alt": "Wedding photography",
+      "featured": false,
+      "order": 14
     }
   ]
 }

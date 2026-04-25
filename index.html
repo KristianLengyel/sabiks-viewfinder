@@ -855,7 +855,7 @@
       .fg-5 { grid-column: 1/2; grid-row: 3; }
       .fg-6 { grid-column: 2/4; grid-row: 3; }
 
-      .categories-grid { grid-template-columns: repeat(2, 1fr); }
+      .categories-grid { grid-template-columns: repeat(3, 1fr); }
       .why-grid { grid-template-columns: repeat(2, 1fr); }
       .about-style { grid-template-columns: 1fr; }
       .contact-layout { grid-template-columns: 1fr; }
@@ -910,7 +910,7 @@
     }
 
     @media (max-width: 480px) {
-      .categories-grid { grid-template-columns: 1fr; }
+      .categories-grid { grid-template-columns: repeat(2, 1fr); }
       .why-grid { grid-template-columns: 1fr; }
       .portfolio-grid { columns: 1; }
     }
@@ -1100,6 +1100,22 @@
         </div>
         <div class="cat-card-arrow">↗</div>
       </div>
+      <div class="cat-card reveal reveal-delay-1" onclick="filterPortfolio('commercial'); navigate('portfolio')">
+        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=75" alt="Commercial" loading="lazy" />
+        <div class="cat-card-content">
+          <span class="cat-card-num">05</span>
+          <span class="cat-card-title">Commercial</span>
+        </div>
+        <div class="cat-card-arrow">↗</div>
+      </div>
+      <div class="cat-card reveal reveal-delay-2" onclick="filterPortfolio('weddings'); navigate('portfolio')">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=75" alt="Weddings" loading="lazy" />
+        <div class="cat-card-content">
+          <span class="cat-card-num">06</span>
+          <span class="cat-card-title">Weddings</span>
+        </div>
+        <div class="cat-card-arrow">↗</div>
+      </div>
     </div>
   </section>
 
@@ -1134,7 +1150,7 @@
       <span class="section-label">Work</span>
       <h1>Portfolio</h1>
     </div>
-    <p>A curated selection of portraits, events, automotive and architecture photography.</p>
+    <p>A curated selection of portraits, events, automotive, architecture, commercial and wedding photography.</p>
   </div>
 
   <div class="filter-bar">
@@ -1143,6 +1159,8 @@
     <button class="filter-btn" data-filter="events" onclick="applyFilter('events', this)">Events</button>
     <button class="filter-btn" data-filter="automotive" onclick="applyFilter('automotive', this)">Automotive</button>
     <button class="filter-btn" data-filter="architecture" onclick="applyFilter('architecture', this)">Architecture</button>
+    <button class="filter-btn" data-filter="commercial" onclick="applyFilter('commercial', this)">Commercial</button>
+    <button class="filter-btn" data-filter="weddings" onclick="applyFilter('weddings', this)">Weddings</button>
   </div>
 
   <div class="portfolio-grid" id="portfolioGrid"></div>

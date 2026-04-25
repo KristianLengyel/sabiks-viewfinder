@@ -31,6 +31,8 @@ collections:
                   - { label: "Events", value: "events" }
                   - { label: "Automotive", value: "automotive" }
                   - { label: "Architecture", value: "architecture" }
+                  - { label: "Commercial", value: "commercial" }
+                  - { label: "Weddings", value: "weddings" }
               - label: "Image"
                 name: "image"
                 widget: "image"
